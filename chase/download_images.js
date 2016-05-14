@@ -33,7 +33,7 @@ bing.list({
     for(i=0;i<res.length;i++){
     	var random_string = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
     	console.log(res[i]['url']);
-    	download(res[i]['url'], 'wiki_data/'+i+'.jpg', function(){
+    	download(res[i]['url'], 'oven/slide_'+i+'.png', function(){
     	  console.log('downloaded' + res['url']);
     	});
     }

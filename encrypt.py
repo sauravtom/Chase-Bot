@@ -5,7 +5,7 @@ import os
 import math
  
 #input format python program.py audio_file hidden_file destiny_file key
-# python main.py sample.wav text.txt sample_mod.wav 12345
+# python encrypt.py sample.wav text.txt sample_mod.wav 12345
 
 audio_file = wave.open(sys.argv[1], 'r')
 hidden_file = open(sys.argv[2], 'r')

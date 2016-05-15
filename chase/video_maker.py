@@ -128,7 +128,7 @@ def main(query='New York'):
 	#download_images(query,NUMBER_OF_IMAGES)
 	generate_voice(summary)
 	#bake the oven
-	bake(page_name,summary)
+	bake(page_name[0],summary)
 
 	folder_name = query.replace(" ",'_')
 	folder_name = folder_name.lower()
@@ -139,9 +139,13 @@ def main(query='New York'):
 
 
 if __name__ == '__main__':
+	subdirectories = os.listdir('%s/oven/'%(DIR_PATH))
 	query = sys.argv[1]
 	#download_images(query='android',NUMBER_OF_IMAGES)
-	main(query)
+	if query in subdirectories:
+		pass
+	else:
+		main(query)
 	#bake()
 	#print summarize("asdasdasdasd(123).asdas[123123]dasdasd.asdasdasd.asdasd.123142134.234234234.234234423")
 	#generate_voice()

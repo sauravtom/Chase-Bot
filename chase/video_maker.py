@@ -125,7 +125,7 @@ def main(query='New York'):
 	text = result.content
 	summary = summarize(text)
 
-	#download_images(query,NUMBER_OF_IMAGES)
+	download_images(query,NUMBER_OF_IMAGES)
 	generate_voice(summary)
 	#bake the oven
 	bake(page_name[0],summary)

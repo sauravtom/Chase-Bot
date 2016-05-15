@@ -102,7 +102,7 @@ def bake2():
 	    -pix_fmt yuv420p -movflags +faststart %s/oven/final.mp4"%(DIR_PATH,DIR_PATH))
 		
 def download_images(query,number='6'):
-	os.system('node download_images.js "%s" %s'%(query,number))
+	os.system('node %s/download_images.js "%s" %s'%(DIR_PATH,query,number))
 
 def generate_voice(text='hello world'):
 	v.codec = 'mp3'

@@ -5,6 +5,7 @@ import os
 import pyvona
 import re
 import sys
+import string
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 NUMBER_OF_IMAGES = 5
@@ -14,6 +15,12 @@ FONT_LOC = '%s/design_assets/TisaPro.otf'%DIR_PATH
 
 v = pyvona.create_voice('GDNAJJ2TZFHSNAJAEYHA', 'vOgSfcz88uZxElIU2K5PLAgWfIJiajojTg81Wla1')
 
+def clean(text):
+    text = text.strip()
+    text = filter(lambda x: x in string.printable, text)
+    #text.encode('ascii', 'ignore')
+    text.encode('ascii',errors='ignore')
+    return text
 
 def summarize(text):
 	text = text.split('.')
@@ -22,11 +29,21 @@ def summarize(text):
 	text = re.sub(r'\([^)]*\)', '', text)
 	text = re.sub(r'\[[^)]*\]', '', text)
 	text = text[:1050]
+	text = text.replace('\n','')
 	return text
 
-def bake():
+def bake(page_name,summary):
+	summary_list = summary.split('.')
 	for counter in range(NUMBER_OF_IMAGES+1):
-		title = 'food chamber'
+		try:
+			title = summary_list[counter]
+			if len(title) < len(page_name):
+				title = page_name
+		except:
+			title = page_name
+		
+		title = clean(title)
+
 		#normalize the dimensions of the png files
 		os.system("convert %s/oven/temp/slide_%s.png \( -clone 0 -blur 0x15 -resize 480x480\! \) \( -clone 0 -resize 480x480 \) -delete 0 \
 		    -gravity center -compose over -composite %s/oven/temp/slide_%s.png"%(DIR_PATH,counter,DIR_PATH,counter))
@@ -108,7 +125,7 @@ def main(query='New York'):
 	#download_images(query,NUMBER_OF_IMAGES)
 	generate_voice(summary)
 	#bake the oven
-	bake()
+	bake(page_name,summary)
 
 	folder_name = query.replace(" ",'_')
 	folder_name = folder_name.lower()

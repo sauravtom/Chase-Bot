@@ -39,6 +39,7 @@ def bake(page_name,summary):
 	for counter in range(NUMBER_OF_IMAGES+1):
 		try:
 			title = summary_list[counter]
+			title = title[:153]
 			if len(title) < len(page_name):
 				title = page_name
 		except:
@@ -54,7 +55,7 @@ def bake(page_name,summary):
 		os.system("convert -size %sx%s -background 'rgba(154,78,225,0.4)' -font %s \
 		    -fill '%s' -gravity West  \
 		    -bordercolor 'rgba(154,78,225,0.4)' -border 25x25 \
-		 caption:'%s' -flatten %s/oven/temp/caption_%s.png"%(375,480/3-70,FONT_LOC,FILLCOLOR,title.upper(),DIR_PATH,counter))
+		 caption:'%s' -flatten %s/oven/temp/caption_%s.png"%(480,480/3-70,FONT_LOC,FILLCOLOR,title.upper(),DIR_PATH,counter))
 
 		#adding captions to slides
 		os.system("composite -gravity South %s/oven/temp/caption_%s.png %s/oven/temp/slide_%s.png %s/oven/temp/slide_%s.png"%(DIR_PATH,counter,DIR_PATH,counter,DIR_PATH,counter))

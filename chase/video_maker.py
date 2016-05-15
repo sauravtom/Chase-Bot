@@ -20,6 +20,8 @@ def clean(text):
     text = filter(lambda x: x in string.printable, text)
     #text.encode('ascii', 'ignore')
     text.encode('ascii',errors='ignore')
+    text = text.replace('"','')
+    text = text.replace("'","")
     return text
 
 def summarize(text):
